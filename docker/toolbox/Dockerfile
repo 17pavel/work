@@ -1,5 +1,11 @@
-FROM alpine
-RUN apk add --no-cache curl wget busybox-extras netcat-openbsd python py-pip
-RUN pip install awscli
-RUN apk --purge -v del py-pip
-CMD tail -f /dev/null
+FROM ubuntu:20.04
+
+RUN apt-get update
+RUN apt-get install -y mariadb-server
+
+EXPOSE 3306
+
+LABEL version="1.0"
+LABEL description="MariaDB Server"
+
+CMD ["mysqld"]
